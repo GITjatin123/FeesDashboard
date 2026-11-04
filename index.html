@@ -2,27 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#101c3b">
-    <title>Daily Fees | Fee management</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#122044">
+    <title>Daily Fees | Collection Ledger</title>
     <style>
         :root {
-            --navy: #101c3b;
-            --navy2: #1c2c54;
-            --indigo: #4f46e5;
-            --indigo2: #4338ca;
+            --navy: #122044;
+            --navy2: #213663;
+            --indigo: #5146e5;
             --bg: #f5f7fb;
             --surface: #fff;
-            --ink: #172033;
+            --ink: #19233a;
             --muted: #778198;
-            --line: #e5e9f1;
-            --green: #13855b;
-            --greenbg: #e8f7ef;
-            --red: #c43e4b;
+            --line: #e4e8f0;
+            --green: #11845a;
+            --greenbg: #e9f7ef;
+            --red: #bd3d4a;
             --redbg: #fff0f1;
-            --amber: #a96806;
+            --amber: #a66b0b;
             --amberbg: #fff5df;
-            --shadow: 0 8px 24px rgba(21, 37, 75, .055);
+            --shadow: 0 8px 24px #1829510b;
             --radius: 15px
         }
 
@@ -38,14 +37,14 @@
         }
 
         body.dark {
-            --bg: #0d1425;
-            --surface: #151f33;
-            --ink: #edf2fb;
-            --muted: #a3aec3;
-            --line: #2a3650;
-            --greenbg: #17392f;
-            --redbg: #40252c;
-            --amberbg: #41351d;
+            --bg: #0e1628;
+            --surface: #172238;
+            --ink: #edf2fc;
+            --muted: #a1aec5;
+            --line: #2c3a55;
+            --greenbg: #193b32;
+            --redbg: #40272e;
+            --amberbg: #3c331d;
             --shadow: 0 8px 24px #0003
         }
 
@@ -57,17 +56,13 @@
             cursor: pointer
         }
 
-        .layout {
-            min-height: 100vh
-        }
-
         .sidebar {
             position: fixed;
             inset: 0 auto 0 0;
-            width: 250px;
-            background: linear-gradient(160deg, var(--navy), #1b2d58);
-            color: #fff;
-            padding: 24px 15px;
+            width: 246px;
+            padding: 24px 16px;
+            background: linear-gradient(160deg, var(--navy), var(--navy2));
+            color: white;
             display: flex;
             flex-direction: column;
             z-index: 10
@@ -75,39 +70,39 @@
 
         .brand {
             display: flex;
-            align-items: center;
             gap: 12px;
-            padding: 0 10px 26px;
-            border-bottom: 1px solid #ffffff20
+            align-items: center;
+            padding: 0 9px 24px;
+            border-bottom: 1px solid #ffffff24
         }
 
         .brand-icon {
             width: 42px;
             height: 42px;
             border-radius: 13px;
-            background: #625cf0;
+            background: #6159ef;
             display: grid;
             place-items: center;
-            font-size: 21px
+            font-size: 21px;
+            font-weight: 750
         }
 
-        .brand b {
-            font-size: 16px;
-            letter-spacing: .01em
+        .brand strong {
+            font-size: 16px
         }
 
         .brand small {
             display: block;
-            color: #aeb8d2;
+            color: #b5bfd6;
             font-size: 11px
         }
 
         .nav-label {
-            margin: 25px 10px 9px;
-            color: #8996b7;
-            font-size: 10px;
-            letter-spacing: .13em;
+            margin: 24px 10px 9px;
+            color: #99a7c4;
             text-transform: uppercase;
+            letter-spacing: .13em;
+            font-size: 10px;
             font-weight: 700
         }
 
@@ -119,23 +114,23 @@
         .nav button {
             border: 0;
             background: none;
-            color: #c3cbe0;
+            color: #c5cde0;
             text-align: left;
             padding: 11px 12px;
             border-radius: 10px;
             display: flex;
+            gap: 11px;
             align-items: center;
-            gap: 12px;
             transition: .18s
         }
 
         .nav button:hover, .nav button.active {
-            background: #ffffff16;
-            color: #fff
+            background: #ffffff18;
+            color: white
         }
 
         .nav button.active {
-            box-shadow: inset 3px 0 #8b88ff
+            box-shadow: inset 3px 0 #8983ff
         }
 
         .nav .ico {
@@ -144,82 +139,65 @@
             font-size: 17px
         }
 
-        .side-foot {
+        .side-note {
             margin-top: auto;
-            padding: 15px 10px 0;
-            border-top: 1px solid #ffffff20;
-            color: #aab5d0;
+            padding: 15px 8px 0;
+            border-top: 1px solid #ffffff24;
+            color: #acb8d1;
             font-size: 11px
         }
 
         .main {
-            margin-left: 250px;
-            min-width: 0
+            margin-left: 246px;
+            min-height: 100vh
         }
 
         .topbar {
-            height: 72px;
+            height: 70px;
+            padding: 0 28px;
+            position: sticky;
+            top: 0;
+            z-index: 5;
             background: var(--surface);
             border-bottom: 1px solid var(--line);
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 0 30px;
-            position: sticky;
-            top: 0;
-            z-index: 5
+            gap: 15px
         }
 
-        .mobile-menu {
-            display: none
+        .menu {
+            display: none;
+            border: 0;
+            background: none;
+            color: var(--ink);
+            font-size: 22px
         }
 
         .top-title {
+            font-weight: 720;
             font-size: 17px;
-            font-weight: 700;
             flex: 1
         }
 
-        .search {
-            height: 38px;
-            width: min(310px, 30vw);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0 12px;
-            background: var(--bg);
-            border: 1px solid var(--line);
-            border-radius: 9px
-        }
-
-        .search input {
-            width: 100%;
-            border: 0;
-            outline: 0;
-            background: none;
-            color: var(--ink)
-        }
-
-        .top-date {
+        .today {
             font-size: 12px;
-            color: var(--muted);
-            white-space: nowrap
+            color: var(--muted)
         }
 
-        .icon-button {
+        .iconbtn {
+            border: 1px solid var(--line);
+            border-radius: 9px;
             width: 38px;
             height: 38px;
-            border: 1px solid var(--line);
             background: var(--surface);
-            border-radius: 10px;
             color: var(--ink);
             font-size: 17px
         }
 
         .content {
-            max-width: 1500px;
-            margin: auto;
-            padding: 28px 30px 46px
+            max-width: 1450px;
+            padding: 28px 30px 45px;
+            margin: auto
         }
 
         .page {
@@ -234,40 +212,38 @@
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            gap: 16px;
+            gap: 15px;
             margin-bottom: 22px
         }
 
         .pagehead h1 {
-            margin: 0;
             font-size: 24px;
-            letter-spacing: -.025em
+            letter-spacing: -.025em;
+            margin: 0
         }
 
         .pagehead p {
-            color: var(--muted);
-            margin: 5px 0 0
+            margin: 5px 0 0;
+            color: var(--muted)
         }
 
         .actions {
             display: flex;
-            align-items: center;
             gap: 9px;
             flex-wrap: wrap
         }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
             border: 1px solid transparent;
             border-radius: 9px;
             padding: 9px 14px;
-            font-weight: 650;
             font-size: 13px;
-            transition: .18s;
-            white-space: nowrap
+            font-weight: 650;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            transition: .18s
         }
 
         .btn:hover {
@@ -276,12 +252,12 @@
 
         .primary {
             background: var(--indigo);
-            color: #fff;
-            box-shadow: 0 3px 9px #4f46e53a
+            color: white;
+            box-shadow: 0 3px 9px #5146e538
         }
 
         .primary:hover {
-            background: var(--indigo2)
+            background: #4035ca
         }
 
         .secondary {
@@ -291,22 +267,16 @@
         }
 
         .danger {
-            background: #fff;
-            color: #b42332;
-            border-color: #f0d1d4
-        }
-
-        .ghost {
-            background: transparent;
-            color: var(--muted);
-            padding: 6px 9px
+            background: var(--surface);
+            border-color: #efd1d5;
+            color: #ad2e3b
         }
 
         .stats {
             display: grid;
-            grid-template-columns:repeat(5, minmax(0, 1fr));
+            grid-template-columns:repeat(4, minmax(0, 1fr));
             gap: 14px;
-            margin-bottom: 20px
+            margin-bottom: 18px
         }
 
         .stat, .card {
@@ -317,17 +287,17 @@
         }
 
         .stat {
-            padding: 17px 18px;
-            min-height: 118px
+            min-height: 118px;
+            padding: 17px 18px
         }
 
-        .stat-top {
+        .stat-label {
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: var(--muted);
             font-size: 12px;
-            font-weight: 600
+            font-weight: 650
         }
 
         .stat-icon {
@@ -342,21 +312,16 @@
         }
 
         .stat-value {
+            margin: 10px 0 1px;
             font-size: 24px;
-            font-weight: 750;
-            margin: 10px 0 2px;
-            letter-spacing: -.035em
+            line-height: 1.2;
+            letter-spacing: -.035em;
+            font-weight: 760
         }
 
         .stat-note {
-            font-size: 11px;
-            color: var(--muted)
-        }
-
-        .grid2 {
-            display: grid;
-            grid-template-columns:1.35fr 1fr;
-            gap: 16px
+            color: var(--muted);
+            font-size: 11px
         }
 
         .card {
@@ -364,30 +329,50 @@
             margin-bottom: 16px
         }
 
-        .card-head {
+        .cardhead {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             gap: 12px;
             margin-bottom: 15px
         }
 
-        .card-head h2 {
+        .cardhead h2 {
             font-size: 15px;
             margin: 0
         }
 
-        .card-head p {
-            margin: 3px 0 0;
+        .cardhead p {
+            font-size: 12px;
             color: var(--muted);
-            font-size: 12px
+            margin: 3px 0 0
         }
 
-        .small-link {
-            border: 0;
-            background: none;
-            color: var(--indigo);
-            font-weight: 650
+        .filters {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            flex-wrap: wrap;
+            margin-bottom: 15px
+        }
+
+        .filters input, .filters select, .field {
+            height: 39px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--ink);
+            padding: 0 10px;
+            outline: 0
+        }
+
+        .filters input:focus, .filters select:focus, .field:focus, .formgroup input:focus, .formgroup select:focus, .formgroup textarea:focus {
+            border-color: var(--indigo);
+            box-shadow: 0 0 0 3px #5146e51a
+        }
+
+        .filters .push {
+            flex: 1
         }
 
         .tablewrap {
@@ -395,18 +380,17 @@
         }
 
         table {
-            border-collapse: collapse;
             width: 100%;
-            min-width: 620px
+            border-collapse: collapse;
+            min-width: 680px
         }
 
         th {
             text-align: left;
-            text-transform: uppercase;
-            letter-spacing: .06em;
             color: var(--muted);
             font-size: 10px;
-            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
             padding: 11px 10px;
             border-bottom: 1px solid var(--line);
             white-space: nowrap
@@ -414,33 +398,21 @@
 
         td {
             padding: 12px 10px;
-            border-bottom: 1px solid var(--line);
             font-size: 12px;
+            border-bottom: 1px solid var(--line);
             vertical-align: middle
         }
 
         tbody tr:last-child td {
-            border-bottom: 0
-        }
-
-        .namecell {
-            font-weight: 650;
-            font-size: 13px
-        }
-
-        .subcell {
-            font-size: 11px;
-            color: var(--muted);
-            margin-top: 2px
+            border: 0
         }
 
         .badge {
             display: inline-flex;
-            border-radius: 99px;
             padding: 4px 9px;
+            border-radius: 99px;
             font-size: 10px;
-            font-weight: 700;
-            white-space: nowrap
+            font-weight: 700
         }
 
         .badge.paid {
@@ -448,137 +420,62 @@
             background: var(--greenbg)
         }
 
-        .badge.partial {
+        .badge.pending {
             color: var(--amber);
             background: var(--amberbg)
         }
 
-        .badge.pending {
-            color: var(--red);
-            background: var(--redbg)
-        }
-
-        .row-actions {
-            display: flex;
-            gap: 4px;
-            white-space: nowrap
-        }
-
-        .row-actions button {
+        .rowbtn {
+            padding: 5px 8px;
             border: 1px solid var(--line);
             border-radius: 7px;
             background: var(--surface);
-            color: var(--muted);
-            padding: 5px 7px;
-            font-size: 11px
-        }
-
-        .row-actions button:hover {
             color: var(--indigo);
-            border-color: var(--indigo)
+            font-size: 11px
         }
 
         .empty {
             text-align: center;
             color: var(--muted);
-            padding: 34px 12px
+            padding: 35px 12px
         }
 
         .empty strong {
             display: block;
             color: var(--ink);
-            font-size: 13px;
             margin-bottom: 3px
         }
 
-        .filters {
-            display: flex;
-            gap: 9px;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 15px
-        }
-
-        .field, .filters input, .filters select {
-            height: 38px;
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            background: var(--surface);
-            color: var(--ink);
-            padding: 0 10px;
-            outline: none
-        }
-
-        .field:focus, .filters input:focus, .filters select:focus {
-            border-color: var(--indigo);
-            box-shadow: 0 0 0 3px #4f46e51a
-        }
-
-        .filters input[type=search] {
-            min-width: 180px
-        }
-
-        .filters .push {
-            flex: 1
-        }
-
-        .reportstats {
+        .split {
             display: grid;
-            grid-template-columns:repeat(3, 1fr);
-            gap: 13px
+            grid-template-columns:1fr 1fr;
+            gap: 16px
         }
 
-        .reportstat {
-            padding: 17px;
-            background: var(--bg);
-            border-radius: 11px
+        .mode-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--line)
         }
 
-        .reportstat small {
+        .mode-total:last-child {
+            border: 0
+        }
+
+        .mode-total span {
             color: var(--muted)
         }
 
-        .reportstat strong {
-            display: block;
-            margin-top: 7px;
-            font-size: 21px
-        }
-
-        .barlist {
-            display: grid;
-            gap: 14px
-        }
-
-        .barrow {
-            display: grid;
-            grid-template-columns:90px 1fr 120px;
-            align-items: center;
-            gap: 12px;
-            font-size: 12px
-        }
-
-        .bartrack {
-            height: 9px;
-            background: var(--bg);
-            border-radius: 99px;
-            overflow: hidden
-        }
-
-        .barfill {
-            height: 100%;
-            background: linear-gradient(90deg, #6d67f5, #4f46e5);
-            border-radius: 99px
-        }
-
-        .barvalue {
-            text-align: right;
-            font-weight: 650
+        .mode-total strong {
+            font-size: 16px
         }
 
         .notice {
-            background: #f0f4ff;
-            color: #45527a;
-            border: 1px solid #dce4ff;
+            background: #f0f3ff;
+            color: #46547c;
+            border: 1px solid #dfe5ff;
             border-radius: 10px;
             padding: 13px 14px;
             font-size: 12px;
@@ -586,26 +483,20 @@
         }
 
         .dark .notice {
-            background: #1c2b49;
-            color: #c7d1ec;
-            border-color: #344466
-        }
-
-        .backups {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap
+            background: #1d2b49;
+            color: #c9d2eb;
+            border-color: #354668
         }
 
         .modal {
             position: fixed;
             inset: 0;
-            background: #10182b88;
+            padding: 18px;
+            background: #111a30a3;
+            z-index: 30;
             display: none;
             align-items: center;
-            justify-content: center;
-            padding: 18px;
-            z-index: 30
+            justify-content: center
         }
 
         .modal.open {
@@ -613,43 +504,43 @@
         }
 
         .dialog {
-            width: min(740px, 100%);
+            width: min(620px, 100%);
             max-height: 92vh;
             overflow: auto;
+            border-radius: 16px;
             background: var(--surface);
-            border-radius: 17px;
-            box-shadow: 0 25px 70px #0004
+            box-shadow: 0 25px 70px #0005
         }
 
-        .dialog-head, .dialog-foot {
-            padding: 17px 21px;
+        .dialoghead, .dialogfoot {
+            padding: 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid var(--line)
         }
 
-        .dialog-head h2 {
+        .dialoghead h2 {
             font-size: 17px;
             margin: 0
         }
 
-        .dialog-head button {
-            border: 0;
+        .dialoghead button {
             background: none;
-            color: var(--muted);
-            font-size: 23px
-        }
-
-        .dialog-body {
-            padding: 20px 21px
-        }
-
-        .dialog-foot {
             border: 0;
-            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 24px
+        }
+
+        .dialogbody {
+            padding: 20px
+        }
+
+        .dialogfoot {
             justify-content: flex-end;
-            gap: 9px
+            gap: 9px;
+            border: 0;
+            border-top: 1px solid var(--line)
         }
 
         .formgrid {
@@ -658,57 +549,40 @@
             gap: 14px
         }
 
-        .form-group {
+        .formgroup {
             display: grid;
             gap: 5px
         }
 
-        .form-group.full {
+        .formgroup.full {
             grid-column: 1/-1
         }
 
-        .form-group label {
+        .formgroup label {
             font-size: 12px;
             font-weight: 650
         }
 
-        .form-group input, .form-group select, .form-group textarea {
+        .formgroup input, .formgroup select, .formgroup textarea {
             width: 100%;
+            padding: 9px 10px;
             border: 1px solid var(--line);
             border-radius: 8px;
-            padding: 9px 10px;
             background: var(--surface);
             color: var(--ink);
             outline: 0
-        }
-
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color: var(--indigo);
-            box-shadow: 0 0 0 3px #4f46e51a
-        }
-
-        .calcbox {
-            background: var(--bg);
-            border-radius: 9px;
-            padding: 10px 12px;
-            color: var(--muted);
-            font-size: 12px
-        }
-
-        .calcbox b {
-            color: var(--ink)
         }
 
         .toast {
             position: fixed;
             right: 20px;
             bottom: 20px;
+            z-index: 60;
             padding: 12px 16px;
             border-radius: 10px;
             background: #13203f;
             color: white;
             box-shadow: 0 12px 36px #0004;
-            z-index: 60;
             opacity: 0;
             transform: translateY(10px);
             transition: .2s;
@@ -724,58 +598,21 @@
             background: #a92937
         }
 
-        .receipt {
-            font: 13px/1.6 Arial, sans-serif;
-            color: #111;
-            padding: 24px;
-            border: 1px dashed #aab0bc
-        }
-
-        .receipt h2 {
-            text-align: center;
-            margin: 0
-        }
-
-        .receipt .rsub {
-            text-align: center;
-            margin: 0 0 20px;
-            color: #555
-        }
-
-        .receipt table {
-            min-width: unset
-        }
-
-        .receipt td, .receipt th {
-            font-size: 13px;
-            padding: 9px
-        }
-
-        .receipt .thank {
-            text-align: center;
-            margin-top: 20px;
-            color: #555
-        }
-
         .mobile-backdrop {
             display: none
         }
 
-        @media (max-width: 1120px) {
+        @media (max-width: 1050px) {
             .stats {
-                grid-template-columns:repeat(3, minmax(0, 1fr))
+                grid-template-columns:repeat(2, minmax(0, 1fr))
             }
 
-            .grid2 {
+            .split {
                 grid-template-columns:1fr
-            }
-
-            .top-date {
-                display: none
             }
         }
 
-        @media (max-width: 760px) {
+        @media (max-width: 740px) {
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform .2s
@@ -794,61 +631,46 @@
             }
 
             .main {
-                margin-left: 0
+                margin: 0
+            }
+
+            .menu {
+                display: block
             }
 
             .topbar {
                 height: 62px;
-                padding: 0 15px;
-                gap: 10px
-            }
-
-            .mobile-menu {
-                display: block;
-                border: 0;
-                background: none;
-                color: var(--ink);
-                font-size: 22px
+                padding: 0 14px;
+                gap: 9px
             }
 
             .top-title {
                 font-size: 15px
             }
 
-            .search {
-                width: auto;
-                flex: 1;
-                max-width: 230px
+            .today {
+                display: none
             }
 
             .content {
-                padding: 20px 15px 32px
+                padding: 20px 14px 32px
             }
 
             .pagehead h1 {
                 font-size: 21px
             }
 
-            .stats {
-                grid-template-columns:repeat(2, minmax(0, 1fr));
-                gap: 10px
-            }
-
             .stat {
-                min-height: 108px;
-                padding: 14px
+                padding: 14px;
+                min-height: 106px
             }
 
             .stat-value {
                 font-size: 20px
             }
 
-            .stat:last-child {
-                grid-column: span 2
-            }
-
-            .reportstats {
-                grid-template-columns:1fr
+            .stats {
+                gap: 10px
             }
 
             .card {
@@ -859,38 +681,22 @@
                 grid-template-columns:1fr
             }
 
-            .form-group.full {
+            .formgroup.full {
                 grid-column: auto
-            }
-
-            .barrow {
-                grid-template-columns:70px 1fr 95px
-            }
-
-            .actions .btn {
-                padding: 8px 10px
             }
         }
 
-        @media (max-width: 430px) {
-            .top-date {
-                display: none
-            }
-
-            .topbar {
-                gap: 7px
-            }
-
-            .icon-button {
-                width: 34px
-            }
-
+        @media (max-width: 420px) {
             .pagehead {
                 display: block
             }
 
             .pagehead .actions {
-                margin-top: 14px
+                margin-top: 13px
+            }
+
+            .stats {
+                grid-template-columns:1fr 1fr
             }
 
             .filters > * {
@@ -901,376 +707,189 @@
                 display: none
             }
 
-            .search {
-                max-width: unset
+            .dialogbody {
+                padding: 15px
             }
 
-            .stats {
-                grid-template-columns:1fr 1fr
-            }
-
-            .stat-value {
-                font-size: 18px
-            }
-
-            .stat-icon {
-                width: 28px;
-                height: 28px
-            }
-
-            .dialog-body {
-                padding: 16px
-            }
-
-            .dialog-head, .dialog-foot {
-                padding: 14px 16px
-            }
-        }
-
-        @media print {
-            body {
-                background: white !important;
-                color: #111 !important
-            }
-
-            .sidebar, .topbar, .content, .modal:not(#receipt-modal), #receipt-modal .dialog-head, #receipt-modal .dialog-foot {
-                display: none !important
-            }
-
-            #receipt-modal {
-                position: static;
-                display: block !important;
-                background: none;
-                padding: 0
-            }
-
-            .dialog {
-                box-shadow: none;
-                max-height: none;
-                width: 100%;
-                border-radius: 0
-            }
-
-            .dialog-body {
-                padding: 0
-            }
-
-            .receipt {
-                border: 0;
-                padding: 12mm
+            .dialoghead, .dialogfoot {
+                padding: 14px
             }
         }
     </style>
 </head>
 <body>
-<div class="layout">
-    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
-        <div class="brand">
-            <div class="brand-icon">₹</div>
-            <div><b>FeeDesk</b><small>Daily fee management</small></div>
-        </div>
-        <div class="nav-label">Workspace</div>
-        <nav class="nav">
-            <button class="active" data-page="dashboard"><span class="ico">▦</span>Dashboard</button>
-            <button data-page="students"><span class="ico">♙</span>Students</button>
-            <button data-page="payments"><span class="ico">↔</span>Payment history</button>
-            <button data-page="reports"><span class="ico">▤</span>Reports</button>
-        </nav>
-        <div class="nav-label">Manage</div>
-        <nav class="nav">
-            <button data-page="settings"><span class="ico">⚙</span>Backup & settings</button>
-        </nav>
-        <div class="side-foot">Local browser storage<br>Keep a regular backup of your records.</div>
-    </aside>
-    <div class="mobile-backdrop" id="mobileBackdrop"></div>
-    <main class="main">
-        <header class="topbar">
-            <button class="mobile-menu" id="menuBtn" aria-label="Open navigation">☰</button>
-            <div class="top-title" id="topTitle">Dashboard</div>
-            <label class="search" title="Search students and receipts"><span>⌕</span><input id="globalSearch"
-                                                                                            type="search"
-                                                                                            placeholder="Search students, ID, receipt…"
-                                                                                            aria-label="Search students and receipts"></label>
-            <div class="top-date" id="todayLabel"></div>
-            <button class="icon-button" id="themeBtn" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
-        </header>
-        <div class="content">
-            <section class="page active" id="page-dashboard">
-                <div class="pagehead">
-                    <div><h1>Good day 👋</h1>
-                        <p>Here's your fee collection overview.</p></div>
-                    <div class="actions">
-                        <button class="btn secondary" id="dashboardExport">⇩ Export CSV</button>
-                        <button class="btn primary" id="addStudentTop">＋ Add fee entry</button>
-                    </div>
+<aside class="sidebar" id="sidebar">
+    <div class="brand">
+        <div class="brand-icon">₹</div>
+        <div><strong>FeeDesk</strong><small>Daily collection ledger</small></div>
+    </div>
+    <div class="nav-label">Workspace</div>
+    <nav class="nav" aria-label="Main navigation">
+        <button class="active" data-page="dashboard"><span class="ico">▦</span>Overview</button>
+        <button data-page="history"><span class="ico">◷</span>Daily history</button>
+        <button data-page="settings"><span class="ico">⚙</span>Backup & settings</button>
+    </nav>
+    <div class="side-note">Saved in this browser<br>Back up your records regularly.</div>
+</aside>
+<div class="mobile-backdrop" id="mobileBackdrop"></div>
+<main class="main">
+    <header class="topbar">
+        <button class="menu" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div class="top-title" id="topTitle">Overview</div>
+        <span class="today" id="todayLabel"></span>
+        <button class="iconbtn" id="themeBtn" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
+    </header>
+    <div class="content">
+        <section class="page active" id="page-dashboard">
+            <div class="pagehead">
+                <div><h1>Daily collection</h1>
+                    <p>Record application fees and see cash, UPI, and pending totals.</p></div>
+                <div class="actions">
+                    <button class="btn secondary" id="exportCsv">⇩ Export CSV</button>
+                    <button class="btn primary" id="addBtn">＋ Add collection</button>
                 </div>
-                <div class="stats" id="dashboardStats"></div>
-                <div class="grid2">
-                    <article class="card">
-                        <div class="card-head">
-                            <div><h2>Recent payments</h2>
-                                <p>Latest transactions recorded</p></div>
-                            <button class="small-link" data-goto="payments">View all →</button>
-                        </div>
-                        <div class="tablewrap" id="recentPayments"></div>
-                    </article>
-                    <article class="card">
-                        <div class="card-head">
-                            <div><h2>Pending fees</h2>
-                                <p>Students with an outstanding balance</p></div>
-                            <button class="small-link" data-goto="students">View students →</button>
-                        </div>
-                        <div class="tablewrap" id="pendingPreview"></div>
-                    </article>
-                </div>
-            </section>
-            <section class="page" id="page-students">
-                <div class="pagehead">
-                    <div><h1>Students</h1>
-                        <p>Manage student fee accounts and outstanding balances.</p></div>
-                    <div class="actions">
-                        <button class="btn primary" id="addStudentBtn">＋ Add fee entry</button>
-                    </div>
-                </div>
+            </div>
+            <div class="filters"><label for="dashDate">Collection date</label><input type="date" id="dashDate"
+                                                                                     aria-label="Dashboard collection date">
+                <button class="btn secondary" id="todayBtn">Today</button>
+                <span class="push"></span><span id="selectedLabel" style="color:var(--muted);font-size:12px"></span>
+            </div>
+            <div class="stats" id="stats"></div>
+            <div class="split">
                 <article class="card">
-                    <div class="filters"><input id="studentSearch" type="search" placeholder="Search name or student ID"
-                                                aria-label="Search students"><select id="classFilter"
-                                                                                     aria-label="Filter by class">
-                        <option value="">All classes</option>
-                    </select><select id="statusFilter" aria-label="Filter by status">
-                        <option value="">All statuses</option>
-                        <option>Paid</option>
-                        <option>Partial</option>
-                        <option>Pending</option>
-                    </select><input id="studentFrom" type="date" aria-label="From date" title="From date"><input
-                            id="studentTo" type="date" aria-label="To date" title="To date">
-                        <button class="btn secondary" id="clearStudentFilters">Clear filters</button>
+                    <div class="cardhead">
+                        <div><h2>Transactions for this day</h2>
+                            <p>Daily application fee entries</p></div>
+                        <button class="rowbtn" id="seeHistory">Full history →</button>
                     </div>
-                    <div class="tablewrap" id="studentsTable"></div>
-                </article>
-            </section>
-            <section class="page" id="page-payments">
-                <div class="pagehead">
-                    <div><h1>Payment history</h1>
-                        <p>Every transaction is kept as a separate record.</p></div>
-                    <div class="actions">
-                        <button class="btn secondary" id="paymentExport">⇩ Export CSV</button>
-                    </div>
-                </div>
-                <article class="card">
-                    <div class="filters"><input id="paymentSearch" type="search"
-                                                placeholder="Search student, ID or receipt"
-                                                aria-label="Search payments"><input id="paymentFrom" type="date"
-                                                                                    aria-label="From date"><input
-                            id="paymentTo" type="date" aria-label="To date"><select id="paymentMethodFilter"
-                                                                                    aria-label="Filter by method">
-                        <option value="">All methods</option>
-                        <option>Cash</option>
-                        <option>UPI</option>
-                        <option>Bank Transfer</option>
-                    </select>
-                        <button class="btn secondary" id="clearPaymentFilters">Clear filters</button>
-                    </div>
-                    <div class="tablewrap" id="paymentsTable"></div>
-                </article>
-            </section>
-            <section class="page" id="page-reports">
-                <div class="pagehead">
-                    <div><h1>Reports</h1>
-                        <p>Collections and outstanding fees for a selected period.</p></div>
-                    <div class="actions">
-                        <button class="btn secondary" id="reportExport">⇩ Export report CSV</button>
-                    </div>
-                </div>
-                <article class="card">
-                    <div class="filters"><label>Month <input id="reportMonth" type="month"
-                                                             aria-label="Report month"></label><span
-                            class="push"></span><label>Daily from <input id="reportFrom" type="date"
-                                                                         aria-label="Report daily from"></label><label>to
-                        <input id="reportTo" type="date" aria-label="Report daily to"></label></div>
-                    <div id="reportOverview"></div>
-                </article>
-                <div class="grid2">
-                    <article class="card">
-                        <div class="card-head">
-                            <div><h2>Daily collections</h2>
-                                <p>Based on the selected date range</p></div>
-                        </div>
-                        <div id="dailyBars"></div>
-                    </article>
-                    <article class="card">
-                        <div class="card-head">
-                            <div><h2>Payment summary</h2>
-                                <p>Selected month</p></div>
-                        </div>
-                        <div id="methodSummary"></div>
-                    </article>
-                </div>
-            </section>
-            <section class="page" id="page-settings">
-                <div class="pagehead">
-                    <div><h1>Backup & settings</h1>
-                        <p>Keep a portable copy of your fee records.</p></div>
-                </div>
-                <article class="card">
-                    <div class="card-head">
-                        <div><h2>Backup and restore</h2>
-                            <p>Export structured JSON or restore a previous backup.</p></div>
-                    </div>
-                    <div class="backups">
-                        <button class="btn primary" id="backupBtn">⇩ Download JSON backup</button>
-                        <label class="btn secondary" for="restoreFile">⇧ Restore from JSON</label><input
-                            id="restoreFile" type="file" accept="application/json,.json" hidden></div>
-                    <p style="margin:14px 0 0;color:var(--muted);font-size:12px">Restoring replaces the records
-                        currently saved in this browser. A confirmation is required before import.</p></article>
-                <article class="card">
-                    <div class="card-head">
-                        <div><h2>Data storage</h2>
-                            <p>Records are saved on this device in this browser.</p></div>
-                    </div>
-                    <div class="notice">This application uses browser localStorage. It is not encrypted and does not
-                        automatically sync between devices. Anyone with access to this browser profile may be able to
-                        access the data. Download JSON backups regularly and store them somewhere safe.
-                    </div>
-                    <div style="margin-top:17px;display:flex;gap:10px;flex-wrap:wrap">
-                        <button class="btn secondary" id="demoBtn">＋ Load sample demo data</button>
-                        <button class="btn danger" id="clearAllBtn">Clear all data</button>
-                    </div>
+                    <div class="tablewrap" id="dayTable"></div>
                 </article>
                 <article class="card">
-                    <div class="card-head">
-                        <div><h2>Appearance</h2>
-                            <p>Adjust the dashboard display.</p></div>
+                    <div class="cardhead">
+                        <div><h2>Collection totals</h2>
+                            <p>Cash and UPI received on selected day</p></div>
                     </div>
-                    <button class="btn secondary" id="settingsThemeBtn">☾ Toggle dark mode</button>
+                    <div id="modeTotals"></div>
+                    <div class="notice" style="margin-top:14px">Entries marked <b>Pending</b> are counted in pending
+                        fees, not in Cash or UPI collections.
+                    </div>
                 </article>
-            </section>
-        </div>
-    </main>
-</div>
-<div class="modal" id="studentModal" role="dialog" aria-modal="true" aria-labelledby="studentModalTitle">
+            </div>
+        </section>
+        <section class="page" id="page-history">
+            <div class="pagehead">
+                <div><h1>Daily history</h1>
+                    <p>Review fee entries by date, application type, and payment mode.</p></div>
+                <div class="actions">
+                    <button class="btn secondary" id="historyCsv">⇩ Export CSV</button>
+                </div>
+            </div>
+            <article class="card">
+                <div class="filters"><label for="historyDate">View day</label><input type="date"
+                                                                                     id="historyDate"><select
+                        id="historyMode" aria-label="Filter payment mode">
+                    <option value="">All modes</option>
+                    <option>Cash</option>
+                    <option>UPI</option>
+                    <option>Pending</option>
+                </select><input type="search" id="historySearch" placeholder="Search application type"
+                                aria-label="Search application type">
+                    <button class="btn secondary" id="clearHistory">Clear filters</button>
+                </div>
+                <div class="stats" id="historyStats"></div>
+                <div class="tablewrap" id="historyTable"></div>
+            </article>
+        </section>
+        <section class="page" id="page-settings">
+            <div class="pagehead">
+                <div><h1>Backup & settings</h1>
+                    <p>Protect your local fee collection records.</p></div>
+            </div>
+            <article class="card">
+                <div class="cardhead">
+                    <div><h2>Data backup</h2>
+                        <p>Download or restore your records as JSON.</p></div>
+                </div>
+                <div class="actions">
+                    <button class="btn primary" id="backupBtn">⇩ Download JSON backup</button>
+                    <label class="btn secondary" for="restoreFile">⇧ Restore JSON backup</label><input type="file"
+                                                                                                       id="restoreFile"
+                                                                                                       accept="application/json,.json"
+                                                                                                       hidden></div>
+            </article>
+            <article class="card">
+                <div class="cardhead">
+                    <div><h2>Local storage</h2></div>
+                </div>
+                <div class="notice">Records are stored in this browser's localStorage. They are not encrypted and do not
+                    automatically sync between devices. Download backups regularly and store them somewhere safe.
+                </div>
+                <div class="actions" style="margin-top:16px">
+                    <button class="btn danger" id="clearBtn">Clear all fee records</button>
+                    <button class="btn secondary" id="themeSettings">☾ Toggle dark mode</button>
+                </div>
+            </article>
+        </section>
+    </div>
+</main>
+<div class="modal" id="entryModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="dialog">
-        <div class="dialog-head"><h2 id="studentModalTitle">Add fee entry</h2>
-            <button data-close="studentModal" aria-label="Close">×</button>
+        <div class="dialoghead"><h2 id="modalTitle">Add collection entry</h2>
+            <button data-close aria-label="Close">×</button>
         </div>
-        <form id="studentForm">
-            <div class="dialog-body">
+        <form id="entryForm">
+            <div class="dialogbody">
                 <div class="formgrid">
-                    <div class="form-group"><label for="sName">Student name *</label><input id="sName" required
-                                                                                            maxlength="80"
-                                                                                            autocomplete="name"></div>
-                    <div class="form-group"><label for="sId">Student ID / roll number *</label><input id="sId" required
-                                                                                                      maxlength="30">
+                    <div class="formgroup full"><label for="appType">Application type *</label><input id="appType"
+                                                                                                      maxlength="80"
+                                                                                                      required
+                                                                                                      placeholder="e.g. New admission, exam form, renewal">
                     </div>
-                    <div class="form-group"><label for="sClass">Class / course *</label><input id="sClass" required
-                                                                                               maxlength="60"></div>
-                    <div class="form-group"><label for="sGuardian">Parent / guardian name</label><input id="sGuardian"
-                                                                                                        maxlength="80">
+                    <div class="formgroup"><label for="amount">Amount (₹) *</label><input type="number" id="amount"
+                                                                                          min="0.01" step="0.01"
+                                                                                          required placeholder="0.00">
                     </div>
-                    <div class="form-group"><label for="sPhone">Phone number</label><input id="sPhone" type="tel"
-                                                                                           inputmode="tel"
-                                                                                           maxlength="15"
-                                                                                           placeholder="10-digit mobile number">
-                    </div>
-                    <div class="form-group"><label for="sTotal">Total fees (₹) *</label><input id="sTotal" type="number"
-                                                                                               min="0.01" step="0.01"
-                                                                                               required></div>
-                    <div class="form-group" id="initialPaidGroup"><label for="sPaid">Amount paid now (₹) *</label><input
-                            id="sPaid" type="number" min="0" step="0.01" value="0"><span class="calcbox">Pending: <b
-                            id="sPending">₹0</b> · Status: <b id="sStatus">Pending</b></span></div>
-                    <div class="form-group" id="initialDateGroup"><label for="sDate">Payment date *</label><input
-                            id="sDate" type="date"></div>
-                    <div class="form-group" id="initialMethodGroup"><label for="sMethod">Payment method</label><select
-                            id="sMethod">
-                        <option value="">Select method if payment is made</option>
+                    <div class="formgroup"><label for="mode">Payment mode / status *</label><select id="mode" required>
+                        <option value="">Choose mode</option>
                         <option>Cash</option>
                         <option>UPI</option>
-                        <option>Bank Transfer</option>
+                        <option>Pending</option>
                     </select></div>
-                    <div class="form-group" id="initialReceiptGroup"><label for="sReceipt">Receipt number</label><input
-                            id="sReceipt" maxlength="35" placeholder="Auto-generated when payment is made"></div>
-                    <div class="form-group full"><label for="sRemarks">Remarks</label><textarea id="sRemarks" rows="2"
-                                                                                                maxlength="300"></textarea>
+                    <div class="formgroup"><label for="entryDate">Date *</label><input type="date" id="entryDate"
+                                                                                       required></div>
+                    <div class="formgroup"><label for="receipt">Application Number</label><input id="receipt"
+                                                                                                         maxlength="50"
+                                                                                                         placeholder="Optional">
+                    </div>
+                    <div class="formgroup full"><label for="remarks">Remarks</label><textarea id="remarks" rows="2"
+                                                                                              maxlength="250"
+                                                                                              placeholder="Optional note"></textarea>
                     </div>
                 </div>
             </div>
-            <div class="dialog-foot">
-                <button type="button" class="btn secondary" data-close="studentModal">Cancel</button>
-                <button class="btn primary" type="submit" id="saveStudent">Save student</button>
+            <div class="dialogfoot">
+                <button type="button" class="btn secondary" data-close>Cancel</button>
+                <button type="submit" class="btn primary">Save entry</button>
             </div>
         </form>
-    </div>
-</div>
-<div class="modal" id="paymentModal" role="dialog" aria-modal="true" aria-labelledby="paymentModalTitle">
-    <div class="dialog" style="width:min(560px,100%)">
-        <div class="dialog-head"><h2 id="paymentModalTitle">Record payment</h2>
-            <button data-close="paymentModal" aria-label="Close">×</button>
-        </div>
-        <form id="paymentForm">
-            <div class="dialog-body">
-                <div class="notice" id="paymentStudentInfo" style="margin-bottom:16px"></div>
-                <div class="formgrid">
-                    <div class="form-group"><label for="pAmount">Amount paid (₹) *</label><input id="pAmount"
-                                                                                                 type="number"
-                                                                                                 min="0.01" step="0.01"
-                                                                                                 required></div>
-                    <div class="form-group"><label for="pDate">Payment date *</label><input id="pDate" type="date"
-                                                                                            required></div>
-                    <div class="form-group"><label for="pMethod">Payment method *</label><select id="pMethod" required>
-                        <option value="">Select method</option>
-                        <option>Cash</option>
-                        <option>UPI</option>
-                        <option>Bank Transfer</option>
-                    </select></div>
-                    <div class="form-group"><label for="pReceipt">Receipt number *</label><input id="pReceipt"
-                                                                                                 maxlength="35"
-                                                                                                 required></div>
-                    <div class="form-group full"><label for="pRemarks">Remarks</label><textarea id="pRemarks" rows="2"
-                                                                                                maxlength="300"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="dialog-foot">
-                <button type="button" class="btn secondary" data-close="paymentModal">Cancel</button>
-                <button class="btn primary">Record payment</button>
-            </div>
-        </form>
-    </div>
-</div>
-<div class="modal" id="receiptModal" role="dialog" aria-modal="true" aria-labelledby="receiptTitle">
-    <div class="dialog" style="width:min(620px,100%)">
-        <div class="dialog-head"><h2 id="receiptTitle">Fee receipt</h2>
-            <button data-close="receiptModal" aria-label="Close">×</button>
-        </div>
-        <div class="dialog-body" id="receiptBody"></div>
-        <div class="dialog-foot">
-            <button class="btn secondary" data-close="receiptModal">Close</button>
-            <button class="btn primary" id="printReceipt">▣ Print receipt</button>
-        </div>
     </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
     'use strict';
-    const STORE = 'feedesk.data.v1', THEME = 'feedesk.theme.v1';
-    const $ = id => document.getElementById(id), all = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-    let data = {version: 1, students: []}, editingId = null, activeStudentId = null, toastTimer;
-    const uid = () => crypto.randomUUID ? crypto.randomUUID() : 'id-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
-
-    function localISO(d = new Date()) {
-        const shifted = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
-        return shifted.toISOString().slice(0, 10)
-    }
+    const KEY = 'feedesk.ledger.v1', THEME = 'feedesk.theme.v1', $ = id => document.getElementById(id),
+        all = (s, r = document) => Array.from(r.querySelectorAll(s));
+    let records = [], toastTimer;
+    const uid = () => crypto.randomUUID ? crypto.randomUUID() : 'fee-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
 
     function todayIST() {
-        const parts = new Intl.DateTimeFormat('en-GB', {
+        const p = new Intl.DateTimeFormat('en-GB', {
             timeZone: 'Asia/Kolkata',
             year: 'numeric',
             month: '2-digit',
             day: '2-digit'
-        }).formatToParts(new Date());
-        const v = Object.fromEntries(parts.map(p => [p.type, p.value]));
-        return `${v.year}-${v.month}-${v.day}`
+        }).formatToParts(new Date()), o = Object.fromEntries(p.map(x => [x.type, x.value]));
+        return `${o.year}-${o.month}-${o.day}`
     }
 
     function money(n) {
@@ -1281,9 +900,9 @@
         }).format(Number(n) || 0)
     }
 
-    function dateFmt(s) {
+    function fmtDate(s) {
         if (!s) return '—';
-        const [y, m, d] = s.slice(0, 10).split('-');
+        const [y, m, d] = s.split('-');
         return `${d}/${m}/${y}`
     }
 
@@ -1297,505 +916,183 @@
         }[c]))
     }
 
-    function paidTotal(s) {
-        return s.payments.reduce((n, p) => n + Number(p.amount), 0)
+    function notify(m, error = false) {
+        const t = $('toast');
+        t.textContent = m;
+        t.classList.toggle('err', error);
+        t.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove('show'), 3200)
     }
 
-    function balance(s) {
-        return Math.max(0, Number(s.totalFees) - paidTotal(s))
-    }
-
-    function status(s) {
-        const b = balance(s);
-        return b <= 0 ? 'Paid' : paidTotal(s) > 0 ? 'Partial' : 'Pending'
-    }
-
-    function persist() {
+    function save() {
         try {
-            localStorage.setItem(STORE, JSON.stringify(data));
+            localStorage.setItem(KEY, JSON.stringify({version: 1, records}));
             return true
         } catch (e) {
-            notify('Could not save data. Browser storage may be full or unavailable.', true);
+            notify('Could not save. Browser storage may be unavailable or full.', true);
             return false
         }
     }
 
-    function normalize(raw) {
-        if (!raw || !Array.isArray(raw.students)) throw Error('Backup must contain a students array.');
-        const ids = new Set(), receipts = new Set();
-        const students = raw.students.map(x => {
-            if (!x || !x.id || !x.studentId || !x.name || !Number.isFinite(Number(x.totalFees)) || Number(x.totalFees) < 0) throw Error('Backup contains an invalid student record.');
-            const sid = String(x.id);
-            if (ids.has(sid)) throw Error('Duplicate student record ID in backup.');
-            ids.add(sid);
-            if (!Array.isArray(x.payments)) throw Error(`Payment history is missing for ${x.name}.`);
-            const payments = x.payments.map(p => {
-                if (!p.id || !p.receipt || !Number.isFinite(Number(p.amount)) || Number(p.amount) <= 0 || !p.date || !p.method) throw Error('Backup contains an invalid payment.');
-                const paymentId = String(p.id);
-                if (ids.has(paymentId)) throw Error('Duplicate record ID in backup.');
-                ids.add(paymentId);
-                const r = String(p.receipt).trim().toLowerCase();
-                if (receipts.has(r)) throw Error('Duplicate receipt number in backup.');
-                receipts.add(r);
-                return {
-                    ...p,
-                    id: paymentId,
-                    amount: Number(p.amount),
-                    receipt: String(p.receipt),
-                    date: String(p.date)
-                }
-            });
-            if (payments.reduce((a, p) => a + p.amount, 0) > Number(x.totalFees) + .005) throw Error(`Payments exceed total fees for ${x.name}.`);
-            return {
-                ...x,
-                id: sid,
-                totalFees: Number(x.totalFees),
-                payments,
-                name: String(x.name),
-                studentId: String(x.studentId),
-                className: String(x.className || ''),
-                guardian: String(x.guardian || ''),
-                phone: String(x.phone || ''),
-                remarks: String(x.remarks || '')
-            }
-        });
-        const studentIds = new Set();
-        for (const s of students) {
-            const id = s.studentId.trim().toLowerCase();
-            if (studentIds.has(id)) throw Error('Student IDs must be unique.');
-            studentIds.add(id)
-        }
-        return {version: 1, students}
-    }
-
     function load() {
         try {
-            const raw = localStorage.getItem(STORE);
-            if (raw) data = normalize(JSON.parse(raw))
+            const raw = localStorage.getItem(KEY);
+            if (raw) {
+                const d = JSON.parse(raw);
+                if (!Array.isArray(d.records)) throw Error();
+                records = d.records.filter(x => x && x.id && x.applicationType && Number(x.amount) > 0 && ['Cash', 'UPI', 'Pending'].includes(x.mode) && x.date)
+            }
         } catch (e) {
-            console.error(e);
-            data = {version: 1, students: []};
-            notify('Saved data could not be read. No records were changed in storage.', true)
+            records = [];
+            notify('Stored data could not be read. The saved file has not been removed.', true)
         }
     }
 
-    function notify(message, error = false) {
-        const t = $('toast');
-        t.textContent = message;
-        t.classList.toggle('err', error);
-        t.classList.add('show');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => t.classList.remove('show'), 3300)
+    function entriesFor(date) {
+        return records.filter(r => r.date === date).sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)))
     }
 
-    function transactions() {
-        return data.students.flatMap(s => s.payments.map(p => ({
-            ...p,
-            student: s
-        }))).sort((a, b) => b.date.localeCompare(a.date) || String(b.createdAt || '').localeCompare(String(a.createdAt || '')))
+    function aggregate(list) {
+        return {
+            cash: list.filter(r => r.mode === 'Cash').reduce((n, r) => n + Number(r.amount), 0),
+            upi: list.filter(r => r.mode === 'UPI').reduce((n, r) => n + Number(r.amount), 0),
+            pending: list.filter(r => r.mode === 'Pending').reduce((n, r) => n + Number(r.amount), 0)
+        }
     }
 
-    function receiptExists(receipt, ignorePaymentId = null) {
-        const key = receipt.trim().toLowerCase();
-        return transactions().some(t => String(t.receipt).trim().toLowerCase() === key && t.id !== ignorePaymentId)
-    }
-
-    function statusBadge(s) {
-        const st = status(s);
-        return `<span class="badge ${st.toLowerCase()}">${st}</span>`
-    }
-
-    function pageTitle(name) {
-        const names = {
-            dashboard: 'Dashboard',
-            students: 'Students',
-            payments: 'Payment history',
-            reports: 'Reports',
-            settings: 'Backup & settings'
-        };
-        $('topTitle').textContent = names[name] || name;
-        all('.nav button').forEach(b => b.classList.toggle('active', b.dataset.page === name));
+    function page(name) {
+        const titles = {dashboard: 'Overview', history: 'Daily history', settings: 'Backup & settings'};
+        $('topTitle').textContent = titles[name];
         all('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + name));
+        all('.nav button').forEach(b => b.classList.toggle('active', b.dataset.page === name));
         $('sidebar').classList.remove('open');
         $('mobileBackdrop').classList.remove('show');
-        if (name === 'reports') renderReports()
+        if (name === 'history') renderHistory()
+    }
+
+    function tableHtml(list) {
+        if (!list.length) return '<div class="empty"><strong>No entries for this day</strong>Add a collection or choose another date.</div>';
+        return `<table><thead><tr><th>Application type</th><th>Amount</th><th>Payment mode</th><th>Application Number</th><th>Remarks</th><th>Action</th></tr></thead><tbody>${list.map(r => `<tr><td><b>${esc(r.applicationType)}</b><div style="color:var(--muted);font-size:11px;margin-top:2px">${fmtDate(r.date)}</div></td><td>${money(r.amount)}</td><td><span class="badge ${r.mode === 'Pending' ? 'pending' : 'paid'}">${esc(r.mode)}</span></td><td>${esc(r.receipt || '—')}</td><td>${esc(r.remarks || '—')}</td><td><button class="rowbtn" data-delete="${esc(r.id)}">Delete</button></td></tr>`).join('')}</tbody></table>`
+    }
+
+    function statCard(label, value, icon, note) {
+        return `<div class="stat"><div class="stat-label">${label}<span class="stat-icon">${icon}</span></div><div class="stat-value">${value}</div><div class="stat-note">${note}</div></div>`
     }
 
     function renderDashboard() {
-        const today = todayIST(), month = today.slice(0, 7), tx = transactions(),
-            totalToday = tx.filter(t => t.date === today).reduce((n, t) => n + t.amount, 0),
-            totalMonth = tx.filter(t => t.date.startsWith(month)).reduce((n, t) => n + t.amount, 0),
-            pending = data.students.reduce((n, s) => n + balance(s), 0),
-            countToday = tx.filter(t => t.date === today).length;
-        $('dashboardStats').innerHTML = [['Collected today', money(totalToday), '↗', 'Today'], ['Collected this month', money(totalMonth), '▦', new Intl.DateTimeFormat('en-IN', {
-            month: 'long',
-            year: 'numeric',
-            timeZone: 'Asia/Kolkata'
-        }).format(new Date())], ['Pending fees', money(pending), '◷', 'Across all students'], ['Total students', data.students.length.toLocaleString('en-IN'), '♙', 'Fee accounts'], ['Payments today', countToday.toLocaleString('en-IN'), '✓', 'Transactions recorded']].map(x => `<div class="stat"><div class="stat-top">${x[0]}<span class="stat-icon">${x[2]}</span></div><div class="stat-value">${x[1]}</div><div class="stat-note">${x[3]}</div></div>`).join('');
-        const recent = tx.slice(0, 6);
-        $('recentPayments').innerHTML = recent.length ? `<table><thead><tr><th>Student</th><th>Date</th><th>Amount</th><th>Receipt</th></tr></thead><tbody>${recent.map(t => `<tr><td><div class="namecell">${esc(t.student.name)}</div><div class="subcell">${esc(t.student.studentId)}</div></td><td>${dateFmt(t.date)}</td><td>${money(t.amount)}</td><td>${esc(t.receipt)}</td></tr>`).join('')}</tbody></table>` : `<div class="empty"><strong>No payments recorded yet</strong>Record a fee entry to see transactions here.</div>`;
-        const owes = data.students.filter(s => balance(s) > 0).sort((a, b) => balance(b) - balance(a)).slice(0, 5);
-        $('pendingPreview').innerHTML = owes.length ? `<table><thead><tr><th>Student</th><th>Balance</th><th>Status</th></tr></thead><tbody>${owes.map(s => `<tr><td><div class="namecell">${esc(s.name)}</div><div class="subcell">${esc(s.studentId)} · ${esc(s.className)}</div></td><td>${money(balance(s))}</td><td>${statusBadge(s)}</td></tr>`).join('')}</tbody></table>` : `<div class="empty"><strong>All fees are up to date</strong>No outstanding student balances.</div>`
+        const date = $('dashDate').value || todayIST(), day = entriesFor(date), sum = aggregate(day);
+        $('selectedLabel').textContent = `${fmtDate(date)} · ${day.length} entr${day.length === 1 ? 'y' : 'ies'}`;
+        $('stats').innerHTML = statCard('Cash collected', money(sum.cash), '₹', 'Selected day') + statCard('UPI collected', money(sum.upi), '▣', 'Selected day') + statCard('Pending amount', money(sum.pending), '◷', 'Selected day') + statCard('Entries recorded', day.length.toLocaleString('en-IN'), '↔', 'Selected day');
+        $('dayTable').innerHTML = tableHtml(day);
+        $('modeTotals').innerHTML = `<div class="mode-total"><span>Cash collected</span><strong>${money(sum.cash)}</strong></div><div class="mode-total"><span>UPI collected</span><strong>${money(sum.upi)}</strong></div><div class="mode-total"><span>Pending</span><strong>${money(sum.pending)}</strong></div><div class="mode-total"><span>Total entry amount</span><strong>${money(sum.cash + sum.upi + sum.pending)}</strong></div>`
     }
 
-    function matchesGlobal(s, query) {
-        return !query || [s.name, s.studentId, s.className, s.guardian, ...s.payments.map(p => p.receipt)].join(' ').toLowerCase().includes(query.toLowerCase())
-    }
-
-    function renderStudents() {
-        const q = $('studentSearch').value.trim().toLowerCase(), st = $('statusFilter').value,
-            from = $('studentFrom').value, to = $('studentTo').value;
-        const classes = [...new Set(data.students.map(s => s.className).filter(Boolean))].sort((a, b) => a.localeCompare(b)),
-            old = $('classFilter').value;
-        $('classFilter').innerHTML = '<option value="">All classes</option>' + classes.map(c => `<option>${esc(c)}</option>`).join('');
-        const cls = classes.includes(old) ? old : '';
-        $('classFilter').value = cls;
-        const rows = data.students.filter(s => (!q || `${s.name} ${s.studentId}`.toLowerCase().includes(q)) && (!cls || s.className === cls) && (!st || status(s) === st) && (!(from || to) || s.payments.some(p => (!from || p.date >= from) && (!to || p.date <= to)))).sort((a, b) => a.name.localeCompare(b.name));
-        $('studentsTable').innerHTML = rows.length ? `<table><thead><tr><th>Student</th><th>Class</th><th>Guardian / phone</th><th>Total fees</th><th>Paid</th><th>Balance</th><th>Status</th><th>Actions</th></tr></thead><tbody>${rows.map(s => `<tr><td><div class="namecell">${esc(s.name)}</div><div class="subcell">${esc(s.studentId)}</div></td><td>${esc(s.className)}</td><td>${esc(s.guardian || '—')}<div class="subcell">${esc(s.phone || '')}</div></td><td>${money(s.totalFees)}</td><td>${money(paidTotal(s))}</td><td>${money(balance(s))}</td><td>${statusBadge(s)}</td><td><div class="row-actions"><button data-act="payment" data-id="${esc(s.id)}">+ Payment</button><button data-act="edit" data-id="${esc(s.id)}">Edit</button><button data-act="history" data-id="${esc(s.id)}">History</button><button data-act="delete" data-id="${esc(s.id)}" aria-label="Delete ${esc(s.name)}">Delete</button></div></td></tr>`).join('')}</tbody></table>` : `<div class="empty"><strong>${data.students.length ? 'No students match these filters' : 'No students added yet'}</strong>${data.students.length ? 'Try changing the search or filters.' : 'Add a fee entry to create your first student account.'}</div>`
-    }
-
-    function renderPayments() {
-        const q = $('paymentSearch').value.trim().toLowerCase(), from = $('paymentFrom').value,
-            to = $('paymentTo').value, method = $('paymentMethodFilter').value;
-        const rows = transactions().filter(t => (!q || `${t.student.name} ${t.student.studentId} ${t.receipt}`.toLowerCase().includes(q)) && (!from || t.date >= from) && (!to || t.date <= to) && (!method || t.method === method));
-        $('paymentsTable').innerHTML = rows.length ? `<table><thead><tr><th>Date</th><th>Student</th><th>Class</th><th>Amount</th><th>Method</th><th>Receipt</th><th>Balance after payment</th><th>Receipt</th></tr></thead><tbody>${rows.map(t => {
-            const before = t.student.payments.filter(p => p.date < t.date || (p.date === t.date && p.id !== t.id && String(p.createdAt || '') < String(t.createdAt || ''))).reduce((n, p) => n + p.amount, 0);
-            const bal = Math.max(0, t.student.totalFees - before - t.amount);
-            return `<tr><td>${dateFmt(t.date)}</td><td><div class="namecell">${esc(t.student.name)}</div><div class="subcell">${esc(t.student.studentId)}</div></td><td>${esc(t.student.className)}</td><td>${money(t.amount)}</td><td>${esc(t.method)}</td><td>${esc(t.receipt)}</td><td>${money(bal)}</td><td><button class="small-link" data-act="receipt" data-id="${esc(t.id)}">View</button></td></tr>`
-        }).join('')}</tbody></table>` : `<div class="empty"><strong>No payment transactions found</strong>Payments will appear here as they are recorded.</div>`
-    }
-
-    function renderReports() {
-        const month = $('reportMonth').value || todayIST().slice(0, 7), from = $('reportFrom').value || month + '-01',
-            to = $('reportTo').value || localISO(new Date(Number(month.slice(0, 4)), Number(month.slice(5, 7)), 0));
-        const tx = transactions(), mtx = tx.filter(t => t.date.startsWith(month)),
-            dtx = tx.filter(t => t.date >= from && t.date <= to), monthSum = mtx.reduce((n, t) => n + t.amount, 0),
-            daySum = dtx.reduce((n, t) => n + t.amount, 0), pending = data.students.reduce((n, s) => n + balance(s), 0);
-        $('reportOverview').innerHTML = `<div class="reportstats"><div class="reportstat"><small>Selected month collection</small><strong>${money(monthSum)}</strong></div><div class="reportstat"><small>Selected date range collection</small><strong>${money(daySum)}</strong></div><div class="reportstat"><small>Current pending fees</small><strong>${money(pending)}</strong></div></div>`;
-        const days = {};
-        for (const t of dtx) days[t.date] = (days[t.date] || 0) + t.amount;
-        const entries = Object.entries(days).sort((a, b) => b[0].localeCompare(a[0])).slice(0, 12),
-            max = Math.max(1, ...entries.map(x => x[1]));
-        $('dailyBars').innerHTML = entries.length ? `<div class="barlist">${entries.map(([d, v]) => `<div class="barrow"><span>${dateFmt(d)}</span><div class="bartrack"><div class="barfill" style="width:${Math.max(2, v / max * 100)}%"></div></div><span class="barvalue">${money(v)}</span></div>`).join('')}</div>` : `<div class="empty">No collections in this date range.</div>`;
-        const methods = ['Cash', 'UPI', 'Bank Transfer'].map(m => [m, mtx.filter(t => t.method === m).reduce((n, t) => n + t.amount, 0)]);
-        $('methodSummary').innerHTML = `<div class="barlist">${methods.map(([m, v]) => `<div class="barrow"><span>${m}</span><div class="bartrack"><div class="barfill" style="width:${Math.max(0, v / (Math.max(1, ...methods.map(x => x[1]))) * 100)}%"></div></div><span class="barvalue">${money(v)}</span></div>`).join('')}</div><p style="color:var(--muted);font-size:11px;margin-top:17px">${mtx.length} transaction${mtx.length === 1 ? '' : 's'} · ${new Intl.DateTimeFormat('en-IN', {
-            month: 'long',
-            year: 'numeric'
-        }).format(new Date(`${month}-01T12:00:00`))}</p>`
+    function renderHistory() {
+        const date = $('historyDate').value || todayIST(), mode = $('historyMode').value,
+            q = $('historySearch').value.trim().toLowerCase(),
+            day = entriesFor(date).filter(r => (!mode || r.mode === mode) && (!q || r.applicationType.toLowerCase().includes(q))),
+            sum = aggregate(day);
+        $('historyStats').innerHTML = statCard('Cash', money(sum.cash), '₹', 'On selected day') + statCard('UPI', money(sum.upi), '▣', 'On selected day') + statCard('Pending', money(sum.pending), '◷', 'On selected day') + statCard('Entries', day.length.toLocaleString('en-IN'), '↔', 'Matching entries');
+        $('historyTable').innerHTML = tableHtml(day)
     }
 
     function render() {
         renderDashboard();
-        renderStudents();
-        renderPayments();
-        if ($('page-reports').classList.contains('active')) renderReports()
+        renderHistory()
     }
 
-    function showModal(id) {
-        $(id).classList.add('open');
-        const f = $(id).querySelector('input:not([type=hidden]),select,button');
-        if (f && f.tagName !== 'BUTTON') setTimeout(() => f.focus(), 30)
+    function openEntry() {
+        $('entryForm').reset();
+        $('entryDate').value = $('dashDate').value || todayIST();
+        $('entryModal').classList.add('open');
+        setTimeout(() => $('appType').focus(), 20)
     }
 
-    function closeModal(id) {
-        $(id).classList.remove('open')
-    }
-
-    function makeReceipt(t) {
-        const s = t.student;
-        const prior = s.payments.filter(p => p.id !== t.id).filter(p => p.date < t.date || (p.date === t.date && String(p.createdAt || '') < String(t.createdAt || ''))).reduce((n, p) => n + p.amount, 0);
-        const remaining = Math.max(0, s.totalFees - prior - t.amount);
-        $('receiptBody').innerHTML = `<div class="receipt"><h2>FEE PAYMENT RECEIPT</h2><p class="rsub">Official payment acknowledgement</p><table><tbody><tr><th>Receipt no.</th><td>${esc(t.receipt)}</td><th>Date</th><td>${dateFmt(t.date)}</td></tr><tr><th>Student</th><td>${esc(s.name)}</td><th>Student ID</th><td>${esc(s.studentId)}</td></tr><tr><th>Class / Course</th><td>${esc(s.className)}</td><th>Guardian</th><td>${esc(s.guardian || '—')}</td></tr><tr><th>Payment method</th><td>${esc(t.method)}</td><th>Phone</th><td>${esc(s.phone || '—')}</td></tr><tr><th>Amount received</th><td colspan="3"><strong>${money(t.amount)}</strong></td></tr><tr><th>Remaining balance</th><td colspan="3"><strong>${money(remaining)}</strong></td></tr>${t.remarks ? `<tr><th>Remarks</th><td colspan="3">${esc(t.remarks)}</td></tr>` : ''}</tbody></table><p class="thank">Thank you. Please retain this receipt for your records.</p></div>`;
-        $('receiptTitle').textContent = `Receipt · ${t.receipt}`;
-        showModal('receiptModal')
-    }
-
-    function nextReceipt() {
-        let n = 1, year = todayIST().slice(0, 4),
-            known = new Set(transactions().map(t => String(t.receipt).toLowerCase()));
-        while (known.has(`fee-${year}-${String(n).padStart(4, '0')}`.toLowerCase())) n++;
-        return `FEE-${year}-${String(n).padStart(4, '0')}`
-    }
-
-    function clearStudentForm() {
-        $('studentForm').reset();
-        $('sPaid').value = '0';
-        $('sDate').value = todayIST();
-        $('sReceipt').value = nextReceipt();
-        editingId = null;
-        $('studentModalTitle').textContent = 'Add fee entry';
-        $('saveStudent').textContent = 'Save student';
-        ['initialPaidGroup', 'initialDateGroup', 'initialMethodGroup', 'initialReceiptGroup'].forEach(id => $(id).style.display = '');
-        updateCalc()
-    }
-
-    function addStudent() {
-        clearStudentForm();
-        showModal('studentModal')
-    }
-
-    function editStudent(id) {
-        const s = data.students.find(x => x.id === id);
-        if (!s) return;
-        clearStudentForm();
-        editingId = id;
-        $('studentModalTitle').textContent = 'Edit student';
-        $('saveStudent').textContent = 'Save changes';
-        $('sName').value = s.name;
-        $('sId').value = s.studentId;
-        $('sClass').value = s.className;
-        $('sGuardian').value = s.guardian;
-        $('sPhone').value = s.phone;
-        $('sTotal').value = s.totalFees;
-        $('sRemarks').value = s.remarks;
-        ['initialPaidGroup', 'initialDateGroup', 'initialMethodGroup', 'initialReceiptGroup'].forEach(id => $(id).style.display = 'none');
-        $('sPending').textContent = money(balance(s));
-        $('sStatus').textContent = status(s);
-        showModal('studentModal')
-    }
-
-    function updateCalc() {
-        const total = Number($('sTotal').value) || 0, paid = Number($('sPaid').value) || 0;
-        $('sPending').textContent = money(Math.max(0, total - paid));
-        $('sStatus').textContent = paid >= total && total > 0 ? 'Paid' : paid > 0 ? 'Partial' : 'Pending'
-    }
-
-    function saveStudent(e) {
+    function createEntry(e) {
         e.preventDefault();
-        const name = $('sName').value.trim(), studentId = $('sId').value.trim(), className = $('sClass').value.trim(),
-            total = Number($('sTotal').value), paid = Number($('sPaid').value || 0), phone = $('sPhone').value.trim();
-        if (!name || !studentId || !className || !Number.isFinite(total) || total <= 0) {
-            notify('Enter a student name, ID, class and a total fee greater than zero.', true);
+        const app = $('appType').value.trim(), amount = Number($('amount').value), mode = $('mode').value,
+            date = $('entryDate').value;
+        if (!app || !Number.isFinite(amount) || amount <= 0 || !['Cash', 'UPI', 'Pending'].includes(mode) || !date) {
+            notify('Enter an application type, valid amount, mode, and date.', true);
             return
         }
-        if (!Number.isFinite(paid) || paid < 0 || paid > total) {
-            notify('Amount paid must be between ₹0 and the total fees.', true);
-            return
-        }
-        if (phone && !/^[+]?[-\d\s()]{7,15}$/.test(phone)) {
-            notify('Enter a valid phone number.', true);
-            return
-        }
-        if (data.students.some(s => s.studentId.toLowerCase() === studentId.toLowerCase() && s.id !== editingId)) {
-            notify('That student ID is already in use.', true);
-            return
-        }
-        let s;
-        if (editingId) {
-            s = data.students.find(x => x.id === editingId);
-            if (paidTotal(s) > total) {
-                notify('Total fees cannot be set below payments already received.', true);
-                return
-            }
-            s.name = name;
-            s.studentId = studentId;
-            s.className = className;
-            s.guardian = $('sGuardian').value.trim();
-            s.phone = phone;
-            s.totalFees = total;
-            s.remarks = $('sRemarks').value.trim()
-        } else {
-            const payments = [];
-            if (paid > 0) {
-                const receipt = $('sReceipt').value.trim();
-                if (!receipt || receiptExists(receipt)) {
-                    notify('Receipt number is required and must be unique.', true);
-                    return
-                }
-                const method = $('sMethod').value;
-                if (!method) {
-                    notify('Choose a payment method for the initial payment.', true);
-                    return
-                }
-                payments.push({
-                    id: uid(),
-                    amount: paid,
-                    date: $('sDate').value || todayIST(),
-                    method,
-                    receipt,
-                    remarks: $('sRemarks').value.trim(),
-                    createdAt: new Date().toISOString()
-                })
-            }
-            s = {
-                id: uid(),
-                name,
-                studentId,
-                className,
-                guardian: $('sGuardian').value.trim(),
-                phone,
-                totalFees: total,
-                remarks: $('sRemarks').value.trim(),
-                createdAt: new Date().toISOString(),
-                payments
-            };
-            data.students.push(s)
-        }
-        if (!persist()) return;
-        closeModal('studentModal');
-        render();
-        notify(editingId ? 'Student details updated.' : 'Student fee entry saved.')
-    }
-
-    function recordPayment(id) {
-        const s = data.students.find(x => x.id === id);
-        if (!s) return;
-        activeStudentId = id;
-        $('paymentForm').reset();
-        $('pDate').value = todayIST();
-        $('pReceipt').value = nextReceipt();
-        $('pAmount').max = balance(s).toFixed(2);
-        $('paymentStudentInfo').innerHTML = `<b>${esc(s.name)}</b> · ${esc(s.studentId)}<br>Current balance: <b>${money(balance(s))}</b>`;
-        showModal('paymentModal')
-    }
-
-    function savePayment(e) {
-        e.preventDefault();
-        const s = data.students.find(x => x.id === activeStudentId);
-        if (!s) return;
-        const amount = Number($('pAmount').value), date = $('pDate').value, method = $('pMethod').value,
-            receipt = $('pReceipt').value.trim();
-        if (!Number.isFinite(amount) || amount <= 0 || amount > balance(s) + .005) {
-            notify('Payment must be greater than zero and cannot exceed the remaining balance.', true);
-            return
-        }
-        if (!date || !method || !receipt || receiptExists(receipt)) {
-            notify('Enter a date, method and unique receipt number.', true);
-            return
-        }
-        s.payments.push({
+        records.push({
             id: uid(),
+            applicationType: app,
             amount,
+            mode,
             date,
-            method,
-            receipt,
-            remarks: $('pRemarks').value.trim(),
+            receipt: $('receipt').value.trim(),
+            remarks: $('remarks').value.trim(),
             createdAt: new Date().toISOString()
         });
-        if (!persist()) return;
-        closeModal('paymentModal');
+        if (!save()) return;
+        $('entryModal').classList.remove('open');
+        $('dashDate').value = date;
+        $('historyDate').value = date;
         render();
-        notify('Payment recorded; previous transactions were preserved.');
-        const p = s.payments[s.payments.length - 1];
-        setTimeout(() => makeReceipt({...p, student: s}), 120)
+        notify('Fee entry saved.')
     }
 
-    function deleteStudent(id) {
-        const s = data.students.find(x => x.id === id);
-        if (!s) return;
-        if (!confirm(`Delete ${s.name} (${s.studentId}) and all ${s.payments.length} linked payment record(s)? This cannot be undone. Download a backup first if needed.`)) return;
-        data.students = data.students.filter(x => x.id !== id);
-        persist();
+    function delEntry(id) {
+        const r = records.find(x => x.id === id);
+        if (!r) return;
+        if (!confirm(`Delete the ${r.applicationType} entry for ${money(r.amount)} on ${fmtDate(r.date)}?`)) return;
+        records = records.filter(x => x.id !== id);
+        save();
         render();
-        notify('Student and linked records deleted.')
+        notify('Entry deleted.')
     }
 
-    function download(name, contents, type) {
-        const blob = new Blob([contents], {type}), url = URL.createObjectURL(blob), a = document.createElement('a');
-        a.href = url;
+    function download(name, text, type) {
+        const u = URL.createObjectURL(new Blob([text], {type})), a = document.createElement('a');
+        a.href = u;
         a.download = name;
-        document.body.appendChild(a);
         a.click();
-        a.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 1000)
+        setTimeout(() => URL.revokeObjectURL(u), 1000)
     }
 
-    function csvEscape(v) {
-        return `"${String(v ?? '').replace(/"/g, '""')}"`
-    }
-
-    function balanceAfter(t) {
-        const ordered = t.student.payments.slice().sort((a, b) => a.date.localeCompare(b.date) || String(a.createdAt || '').localeCompare(String(b.createdAt || '')));
-        let running = Number(t.student.totalFees);
-        for (const p of ordered) {
-            running = Math.max(0, running - Number(p.amount));
-            if (p.id === t.id) return running
-        }
-        return balance(t.student)
-    }
-
-    function exportCsv(report = false) {
-        let rows;
-        if (report) {
-            const month = $('reportMonth').value || todayIST().slice(0, 7);
-            rows = transactions().filter(t => t.date.startsWith(month))
-        } else rows = transactions();
-        const header = ['Date', 'Student name', 'Student ID', 'Class / course', 'Guardian', 'Phone', 'Total fees', 'Amount paid', 'Balance after payment', 'Payment method', 'Receipt number', 'Remarks'];
-        const out = [header, ...rows.map(t => [t.date, t.student.name, t.student.studentId, t.student.className, t.student.guardian, t.student.phone, t.student.totalFees, t.amount, balanceAfter(t), t.method, t.receipt, t.remarks])].map(r => r.map(csvEscape).join(','));
-        download(`fee-records-${todayIST()}.csv`, '\ufeff' + out.join('\r\n'), 'text/csv;charset=utf-8');
-        notify('CSV export downloaded.')
+    function exportCsv(date = $('historyDate').value || todayIST()) {
+        const list = entriesFor(date),
+            head = ['Date', 'Application type', 'Amount', 'Payment mode', 'Application number', 'Remarks'],
+            rows = list.map(r => [r.date, r.applicationType, r.amount, r.mode, r.receipt, r.remarks]),
+            csv = [head, ...rows].map(row => row.map(x => '"' + String(x ?? '').replace(/"/g, '""') + '"').join(',')).join('\r\n');
+        download(`fee-history-${date}.csv`, '\ufeff' + csv, 'text/csv;charset=utf-8');
+        notify('Daily CSV downloaded.')
     }
 
     function backup() {
         download(`feedesk-backup-${todayIST()}.json`, JSON.stringify({
-            app: 'FeeDesk',
+            app: 'FeeDesk Ledger',
             version: 1,
-            exportedAt: new Date().toISOString(), ...data
+            exportedAt: new Date().toISOString(),
+            records
         }, null, 2), 'application/json');
         notify('JSON backup downloaded.')
     }
 
-    function restoreFile(file) {
+    function restore(file) {
         const reader = new FileReader();
         reader.onload = () => {
             try {
-                const raw = JSON.parse(reader.result), normalized = normalize(raw);
-                if (!confirm(`Restore ${normalized.students.length} student record(s)? This replaces current records in this browser.`)) return;
-                data = normalized;
-                if (persist()) {
+                const v = JSON.parse(reader.result);
+                if (!v || !Array.isArray(v.records) || v.records.some(r => !r.id || !r.applicationType || !Number.isFinite(Number(r.amount)) || Number(r.amount) <= 0 || !['Cash', 'UPI', 'Pending'].includes(r.mode) || !/^\d{4}-\d{2}-\d{2}$/.test(r.date))) throw Error('Backup format is invalid.');
+                if (new Set(v.records.map(r => r.id)).size !== v.records.length) throw Error('Backup contains duplicate entry IDs.');
+                if (!confirm(`Restore ${v.records.length} fee entries? This replaces current records.`)) return;
+                records = v.records.map(r => ({...r, amount: Number(r.amount)}));
+                if (save()) {
                     render();
                     notify('Backup restored successfully.')
                 }
             } catch (e) {
-                notify(e.message || 'Could not read that backup file.', true)
+                notify(e.message || 'Could not read this backup.', true)
             }
         };
-        reader.onerror = () => notify('Could not read selected file.', true);
         reader.readAsText(file)
     }
 
-    function demo() {
-        if (data.students.length && !confirm('Add sample records alongside your current data? Existing records will be kept.')) return;
-        const now = todayIST(), month = now.slice(0, 7);
-        const specs = [['Aarav Sharma', 'STU-1042', 'Class 10 A', 'Rohit Sharma', '9876543210', 24000, 12000, 'UPI', `${month}-02`], ['Meera Patel', 'STU-1088', 'Class 9 B', 'Nisha Patel', '9876543211', 18000, 18000, 'Cash', now], ['Kabir Singh', 'STU-1103', 'Class 10 A', 'Aman Singh', '9876543212', 24000, 5000, 'Bank Transfer', `${month}-05`]];
-        for (const [name, studentId, className, guardian, phone, totalFees, amount, method, date] of specs) {
-            if (data.students.some(s => s.studentId === studentId)) continue;
-            data.students.push({
-                id: uid(),
-                name,
-                studentId,
-                className,
-                guardian,
-                phone,
-                totalFees,
-                remarks: 'Sample demo record',
-                createdAt: new Date().toISOString(),
-                payments: [{
-                    id: uid(),
-                    amount,
-                    date,
-                    method,
-                    receipt: nextReceipt(),
-                    remarks: 'Demo payment',
-                    createdAt: new Date().toISOString()
-                }]
-            })
-        }
-        persist();
-        render();
-        notify('Sample records added. Delete them when you are finished exploring.')
-    }
-
-    function searchEverywhere(query) {
-        if (!query) return;
-        pageTitle('students');
-        $('studentSearch').value = query;
-        renderStudents()
-    }
-
-    // Navigation and event bindings
-    all('.nav button').forEach(b => b.addEventListener('click', () => pageTitle(b.dataset.page)));
-    all('[data-goto]').forEach(b => b.addEventListener('click', () => pageTitle(b.dataset.goto)));
+    all('.nav button').forEach(b => b.addEventListener('click', () => page(b.dataset.page)));
     $('menuBtn').addEventListener('click', () => {
         $('sidebar').classList.add('open');
         $('mobileBackdrop').classList.add('show')
@@ -1804,99 +1101,56 @@
         $('sidebar').classList.remove('open');
         $('mobileBackdrop').classList.remove('show')
     });
-    $('addStudentBtn').addEventListener('click', addStudent);
-    $('addStudentTop').addEventListener('click', addStudent);
-    $('studentForm').addEventListener('submit', saveStudent);
-    $('paymentForm').addEventListener('submit', savePayment);
-    $('sTotal').addEventListener('input', updateCalc);
-    $('sPaid').addEventListener('input', updateCalc);
-    ['studentSearch', 'classFilter', 'statusFilter', 'studentFrom', 'studentTo'].forEach(id => $(id).addEventListener('input', renderStudents));
-    $('clearStudentFilters').addEventListener('click', () => {
-        ['studentSearch', 'classFilter', 'statusFilter', 'studentFrom', 'studentTo'].forEach(id => $(id).value = '');
-        renderStudents()
+    $('addBtn').addEventListener('click', openEntry);
+    $('entryForm').addEventListener('submit', createEntry);
+    $('dashDate').value = todayIST();
+    $('historyDate').value = todayIST();
+    $('dashDate').addEventListener('input', renderDashboard);
+    $('todayBtn').addEventListener('click', () => {
+        $('dashDate').value = todayIST();
+        renderDashboard()
     });
-    ['paymentSearch', 'paymentFrom', 'paymentTo', 'paymentMethodFilter'].forEach(id => $(id).addEventListener('input', renderPayments));
-    $('clearPaymentFilters').addEventListener('click', () => {
-        ['paymentSearch', 'paymentFrom', 'paymentTo', 'paymentMethodFilter'].forEach(id => $(id).value = '');
-        renderPayments()
+    ['historyDate', 'historyMode', 'historySearch'].forEach(id => $(id).addEventListener('input', renderHistory));
+    $('clearHistory').addEventListener('click', () => {
+        $('historyDate').value = todayIST();
+        $('historyMode').value = '';
+        $('historySearch').value = '';
+        renderHistory()
     });
-    $('globalSearch').addEventListener('input', e => {
-        if (e.target.value.trim()) searchEverywhere(e.target.value.trim()); else {
-            $('studentSearch').value = '';
-            renderStudents()
+    $('seeHistory').addEventListener('click', () => page('history'));
+    $('exportCsv').addEventListener('click', () => exportCsv($('dashDate').value || todayIST()));
+    $('historyCsv').addEventListener('click', () => exportCsv($('historyDate').value || todayIST()));
+    $('backupBtn').addEventListener('click', backup);
+    $('restoreFile').addEventListener('change', e => {
+        if (e.target.files[0]) restore(e.target.files[0]);
+        e.target.value = ''
+    });
+    $('clearBtn').addEventListener('click', () => {
+        if (!records.length) {
+            notify('There are no records to clear.');
+            return
+        }
+        if (confirm(`Permanently clear all ${records.length} fee entries from this browser?`)) {
+            records = [];
+            save();
+            render();
+            notify('All fee records cleared.')
         }
     });
-    $('themeBtn').addEventListener('click', toggleTheme);
-    $('settingsThemeBtn').addEventListener('click', toggleTheme);
 
     function toggleTheme() {
         document.body.classList.toggle('dark');
         localStorage.setItem(THEME, document.body.classList.contains('dark') ? 'dark' : 'light')
     }
 
+    $('themeBtn').addEventListener('click', toggleTheme);
+    $('themeSettings').addEventListener('click', toggleTheme);
     document.addEventListener('click', e => {
-        const close = e.target.closest('[data-close]');
-        if (close) closeModal(close.dataset.close);
-        const act = e.target.closest('[data-act]');
-        if (act) {
-            const id = act.dataset.id, type = act.dataset.act;
-            if (type === 'payment') recordPayment(id);
-            if (type === 'edit') editStudent(id);
-            if (type === 'delete') deleteStudent(id);
-            if (type === 'history') showStudentHistory(id);
-            if (type === 'receipt') {
-                const t = transactions().find(x => x.id === id);
-                if (t) makeReceipt(t)
-            }
-        }
+        if (e.target.closest('[data-close]')) $('entryModal').classList.remove('open');
+        const b = e.target.closest('[data-delete]');
+        if (b) delEntry(b.dataset.delete);
         if (e.target.classList.contains('modal')) e.target.classList.remove('open')
     });
-
-    function showStudentHistory(id) {
-        const s = data.students.find(x => x.id === id);
-        if (!s) return;
-        const list = s.payments.slice().sort((a, b) => b.date.localeCompare(a.date));
-        const html = list.length ? `<p style="margin-bottom:12px"><b>${esc(s.name)}</b> · ${esc(s.studentId)} · Current balance ${money(balance(s))}</p><div class="tablewrap"><table><thead><tr><th>Date</th><th>Amount</th><th>Method</th><th>Receipt</th><th></th></tr></thead><tbody>${list.map(p => `<tr><td>${dateFmt(p.date)}</td><td>${money(p.amount)}</td><td>${esc(p.method)}</td><td>${esc(p.receipt)}</td><td><button class="small-link" data-act="receipt" data-id="${esc(p.id)}">Receipt</button></td></tr>`).join('')}</tbody></table></div>` : `<div class="empty">No payments have been recorded for this student.</div>`;
-        let modal = $('historyModal');
-        if (!modal) {
-            modal = document.createElement('div');
-            modal.id = 'historyModal';
-            modal.className = 'modal';
-            modal.innerHTML = '<div class="dialog"><div class="dialog-head"><h2>Payment history</h2><button data-close="historyModal" aria-label="Close">×</button></div><div class="dialog-body" id="historyBody"></div><div class="dialog-foot"><button class="btn secondary" data-close="historyModal">Close</button></div></div>';
-            document.body.appendChild(modal)
-        }
-        $('historyBody').innerHTML = html;
-        showModal('historyModal')
-    }
-
-    $('dashboardExport').addEventListener('click', () => exportCsv());
-    $('paymentExport').addEventListener('click', () => exportCsv());
-    $('reportExport').addEventListener('click', () => exportCsv(true));
-    $('reportMonth').value = todayIST().slice(0, 7);
-    $('reportMonth').addEventListener('input', renderReports);
-    $('reportFrom').value = todayIST().slice(0, 7) + '-01';
-    $('reportTo').value = todayIST();
-    $('reportFrom').addEventListener('input', renderReports);
-    $('reportTo').addEventListener('input', renderReports);
-    $('backupBtn').addEventListener('click', backup);
-    $('restoreFile').addEventListener('change', e => {
-        if (e.target.files[0]) restoreFile(e.target.files[0]);
-        e.target.value = ''
-    });
-    $('demoBtn').addEventListener('click', demo);
-    $('clearAllBtn').addEventListener('click', () => {
-        if (!data.students.length) {
-            notify('There is no data to clear.');
-            return
-        }
-        if (confirm(`Permanently delete all ${data.students.length} student record(s) and their payment history from this browser? Download a backup first if you need to keep them.`)) {
-            data = {version: 1, students: []};
-            persist();
-            render();
-            notify('All local fee data was cleared.')
-        }
-    });
-    $('printReceipt').addEventListener('click', () => window.print());
     document.addEventListener('keydown', e => {
         if (e.key === 'Escape') all('.modal.open').forEach(m => m.classList.remove('open'))
     });
