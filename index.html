@@ -153,7 +153,7 @@
         }
 
         .topbar {
-            height: 70px;
+            height: 91px;
             padding: 0 28px;
             position: sticky;
             top: 0;
@@ -447,7 +447,7 @@
         }
 
         .split {
-            display: grid;
+            /*display: grid;*/
             grid-template-columns:1fr 1fr;
             gap: 16px
         }
@@ -727,9 +727,9 @@
     <nav class="nav" aria-label="Main navigation">
         <button class="active" data-page="dashboard"><span class="ico">▦</span>Overview</button>
         <button data-page="history"><span class="ico">◷</span>Daily history</button>
-        <button data-page="settings"><span class="ico">⚙</span>Backup & settings</button>
+        <button data-page="settings" style="display: none"><span class="ico">⚙</span>Backup & settings</button>
     </nav>
-    <div class="side-note">Saved in this browser<br>Back up your records regularly.</div>
+    <div class="side-note">Saved in this browser<br>Back up your records regularly. <br>Developed by jatin</div>
 </aside>
 <div class="mobile-backdrop" id="mobileBackdrop"></div>
 <main class="main">
@@ -843,7 +843,7 @@
                     <div class="formgroup full"><label for="appType">Application type *</label><input id="appType"
                                                                                                       maxlength="80"
                                                                                                       required
-                                                                                                      placeholder="e.g. New admission, exam form, renewal">
+                                                                                                      placeholder="e.g. birth , residence, cast...">
                     </div>
                     <div class="formgroup"><label for="amount">Amount (₹) *</label><input type="number" id="amount"
                                                                                           min="0.01" step="0.01"
