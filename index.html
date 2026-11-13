@@ -1013,7 +1013,7 @@
         e.preventDefault();
         const app = $('appType').value.trim(), amount = Number($('amount').value), mode = $('mode').value,
             date = $('entryDate').value;
-        if (!app || !Number.isFinite(amount) || amount <= 0 || !['Cash', 'UPI', 'Pending'].includes(mode) || !date) {
+        if (!app || !Number.isFinite(amount) || amount < 0 || !['Cash', 'UPI', 'Pending'].includes(mode) || !date) {
             notify('Enter an application type, valid amount, mode, and date.', true);
             return
         }
